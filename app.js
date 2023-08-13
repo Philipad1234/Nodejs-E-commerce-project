@@ -36,7 +36,9 @@ const port=process.env.PORT
 
 
 app.get('/', function(req, res){
-    res.send('Working')
+    res.render('index', {
+        title: 'Home'
+    });
 })
 
 
