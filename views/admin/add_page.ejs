@@ -1,0 +1,23 @@
+<%- include('../partials/admin_header') %>
+
+   <h2 class="page-title mt-4">Add Page</h2>
+   <a href="/admin/pages" class="btn btn-warning">Back to all pages</a>
+   <br><br>
+
+   <form action="/admin/pages/add-pages" method="post">
+<div class="form-group mb-3">
+    <label for="" class="mb-2">Title</label>
+    <input type="text" class="form-control" name="title" value="<%= title %>" placeholder="title">
+</div>
+<div class="form-group mb-3">
+    <label for="" class="mb-2">Slug</label>
+    <input type="text" class="form-control" name="slug" value="<%= slug %>" placeholder="slug">
+</div>
+<div class="form-group mb-3">
+    <label for="" class="mb-2">Content</label>
+   <textarea name="content" class="form-control" cols="30" rows="10" placeholder="Content"><%= content %></textarea>
+</div>
+<button class="btn btn-warning mt-3">Submit</button>
+   </form>
+
+<%- include('../partials/admin_footer') %>
