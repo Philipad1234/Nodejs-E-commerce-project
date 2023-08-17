@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session')
 const { v4: uuidv4 } = require('uuid');
-const { query } = require('express-validator');
+const expressValidator = require('express-validator');
 const pages = require('./routes/pages')
 const adminPages = require('./routes/adminPages')
 
@@ -19,6 +19,9 @@ app.set('view engine', 'ejs');
 // Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set global errors variables
+app.locals.errors = null;
+
 // Set up sessions
 app.use(session({
     secret: uuidv4(),
@@ -26,6 +29,8 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: true }
 }))
+
+app.use(expressValidator());
 
 // Messages
 app.use(require('connect-flash')());

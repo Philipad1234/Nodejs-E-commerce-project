@@ -36,14 +36,15 @@
 </head>
 
 <body>
- 
+
 
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" target="_blank" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">PEEK</a>
+        <a href="/" target="_blank"
+          class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">PEEK</a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-4 justify-content-center mb-md-0" >
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-4 justify-content-center mb-md-0">
           <li><a href="/admin/pages" class="nav-link px-5 text-secondary ml-4">Pages</a></li>
         </ul>
 
@@ -62,3 +63,12 @@
 
   <div class="container">
     <%- messages('messages', locals) %>
+
+      <% if (errors) { %>
+        <% errors.forEach(function(error){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%= error.msg %></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <% }) %>
+            <% } %>
