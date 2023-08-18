@@ -38,7 +38,7 @@ router.post('/add-page', function (req, res) {
     if (slug == "") slug = title.replace(/\s+/g, '-').toLowerCase();
     const content = req.body.content;
 
-    const errors = req.validationErrors();
+    let errors = req.validationErrors();
     if (errors) {
         res.render('admin/add_page', {
             errors: errors,
@@ -47,7 +47,11 @@ router.post('/add-page', function (req, res) {
             content: content
         })
     } else {
-        Page.findOne({slug:slug}, function(err, page){
+        Page
+        .findOne({
+            slug:slug
+        })
+        .then((err, page)=>{
             if(page){
                 req.flash('danger', 'Page slug exists, choose another!');
                 res.render('admin/add_page', {
@@ -62,7 +66,9 @@ router.post('/add-page', function (req, res) {
                     content: content,
                     sorting: 0
                 });
-                page.save(function(err){
+                page
+                .save()
+                .then((err)=>{
                     if(err) return console.log(err);
                     req.flash('success', 'Page Added!');
                     res.redirect('/admin/pages')

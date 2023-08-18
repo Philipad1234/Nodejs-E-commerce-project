@@ -30,6 +30,25 @@ app.use(session({
     cookie: { secure: true }
 }))
 
+// Set up dotenv
+require('dotenv').config()
+
+// connect to database
+const uri = process.env.CONNECT
+
+
+
+async function connect() {
+    try {
+        await mongoose.connect(uri)
+        console.log('connected to MongoDB')
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+connect()
+
 app.use(expressValidator());
 
 // Messages
@@ -43,22 +62,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// Set up dotenv
-require('dotenv').config()
 
-// connect to database
-const uri = process.env.CONNECT
-
-async function connect() {
-    try {
-        await mongoose.connect(uri)
-        console.log('connected to MongoDB')
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-connect()
 
 // Start server
 const port = process.env.PORT
